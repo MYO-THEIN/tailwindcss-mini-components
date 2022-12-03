@@ -4,8 +4,7 @@
   "description": "testing tailwind css",
   "main": "index.js",
   "scripts": {
-    "tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "jsonserver": "json-server ./src/store/data.json --watch"
+    "tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
   },
   "author": "",
   "license": "ISC",

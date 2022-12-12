@@ -4,7 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Remote Desktop</title>
+    <title>Vanilla | Remote Desktop software</title>
+
+    <!-- Primary Meta Tags -->
+    <title>Vanilla | Remote Desktop software</title>
+    <meta name="title" content="Remote Desktop software">
+    <meta name="description" content="Access any device at any time. From anywhere. Always secure and fast.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vanilla.com">
+    <meta property="og:title" content="Remote Desktop software">
+    <meta property="og:description" content="Access any device at any time. From anywhere. Always secure and fast.">
+    <meta property="og:image" content="/public/assets/img/remote-desktop.html(iPad Pro).png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vanilla.com">
+    <meta property="twitter:title" content="Remote Desktop software">
+    <meta property="twitter:description" content="Access any device at any time. From anywhere. Always secure and fast.">
+    <meta property="twitter:image" content="/public/assets/img/remote-desktop.html(iPad Pro).png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="/dist/output.css" rel="stylesheet">
     <style>
@@ -24,7 +45,7 @@
 </head>
 <body class="dark:bg-slate-900">
     <!-- NavBar -->
-    <div class="dark:bg-slate-800 py-3">
+    <div id="nav" class="bg-white dark:bg-slate-800 py-3 w-full duration-200 animate__animated">
         <div class="container mx-auto px-5 md:px-0">
             <div class="flex justify-between items-center">
                 <!-- logo -->
@@ -37,7 +58,7 @@
                 </div>
     
                 <!-- mobile menu -->
-                <div class="fixed top-0 -left-full bg-white dark:bg-slate-900 h-screen w-full flex justify-center items-center z-10 md:static md:top-auto md:left-auto md:h-auto mobile-menu duration-300">
+                <div class="fixed top-0 -left-full h-screen w-full flex justify-center items-center z-10 md:static md:top-auto md:left-auto md:h-auto mobile-menu duration-300">
                     <div class="absolute top-3 right-3 border border-green-500 w-7 h-7 flex justify-center items-center rounded-full close-menu md:hidden">
                         <i class="fa-solid fa-xmark text-green-500"></i>
                     </div>
@@ -115,7 +136,7 @@
     </section>
 
     <!-- Why section -->
-    <section class="bg-slate-50 px-16 py-36">
+    <section id="why" class="bg-slate-50 px-16 py-36">
         <div class="container mx-auto text-center md:text-left space-y-5">
             <h6 class="text-green-500">Remote Desktop Software</h6>
             <h1 class="text-6xl md:text-8xl">Overcoming <br> distance</h1>
@@ -420,6 +441,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js" integrity="sha512-fHXRw0CXruAoINU11+hgqYvY/PcsOWzmj0QmcSOtjlJcqITbPyypc8cYpidjPurWpCnlB8VKfRwx6PIpASCUkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+        // Dark Mode
         const toggleB = document.getElementById("toggleB");
 
         const changeThemeToDark = () => {
@@ -452,20 +474,27 @@
         const menuOpen = document.querySelector('.menu-open');
         const closeMenu = document.querySelector('.close-menu');
         const mobileMenu = document.querySelector('.mobile-menu');
-        
+
+        let changeMobileMenuBackgroundColor = ()=>{
+            mobileMenu.style.backgroundColor = toggleB.checked ? '#1E293B' : '#FFFFFF';  // dark : light
+        }
+
         menuOpen.addEventListener('click', ()=>{
             mobileMenu.style.left = '0px';
+            changeMobileMenuBackgroundColor();
         })
         closeMenu.addEventListener('click', ()=>{
             mobileMenu.style.left = '-100%';
+            mobileMenu.style.backgroundColor = 'transparent';
         })
        
+        // Animate the NavBar  
         const nav = document.getElementById('nav');
         var waypoint = new Waypoint({
             element: document.getElementById('why'),
             handler: function(direction) {
                 if (direction === "down") {
-                    nav.classList.add("fixed","top-0", "animate__fadeInDown", "shadow-lg");
+                    nav.classList.add("fixed", "top-0", "animate__fadeInDown", "shadow-lg");
                 } else {
                     nav.classList.remove("fixed","top-0", "animate__fadeInDown", "shadow-lg");
                 }

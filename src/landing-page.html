@@ -8,6 +8,68 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/dist/output.css" />
     <style>
+        .loading {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            z-index: 30;
+        }
+        .loader {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            border: 3px solid;
+            border-color: #49de80 #49de80 transparent transparent;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        .loader::after,
+        .loader::before {
+            content: '';  
+            box-sizing: border-box;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            border: 3px solid;
+            border-color: transparent transparent #FF3D00 #FF3D00;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            animation: rotationBack 0.5s linear infinite;
+            transform-origin: center center;
+        }
+        .loader::before {
+            width: 32px;
+            height: 32px;
+            border-color: #49de80 #49de80 transparent transparent;
+            animation: rotation 1.5s linear infinite;
+        }
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        } 
+        @keyframes rotationBack {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
         @font-face {
             font-family: "Euclid-Circular-A";
             src: url("../public/assets/fonts/euclid-circular-a-cufonfonts/Euclid-Circular-A-Medium.ttf");
@@ -23,11 +85,16 @@
     </style>
 </head>
 <body class="dark:bg-slate-900">
+    <!-- loading -->
+    <div class="loading">
+        <span class="loader"></span>
+    </div>
+
     <!-- NavBar -->    
-    <div id="nav" class="p-5 bg-green-500 w-full animate__animated duration-200">
-        <div class="container mx-auto flex justify-between items-center">
+    <div id="nav" class="py-5 md:px-5 bg-green-500 w-full animate__animated duration-200 dark:bg-slate-900 z-50">
+        <div class="container flex justify-between items-center">
             <!-- logo brand -->
-            <div>
+            <div class="scale-50 md:scale-75">
                 <svg width="162" height="47" viewBox="0 0 162 47" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M65.344 36L56.032 13.28H61.568L67.616 28.416L73.632 13.28H79.232L69.92 36H65.344ZM85.073 36.352C83.0037 36.352 81.2437 35.5307 79.793 33.888C78.3637 32.2453 77.649 30.2827 77.649 28C77.649 25.7173 78.3637 23.7547 79.793 22.112C81.2437 20.4693 83.0037 19.648 85.073 19.648C86.9077 19.648 88.3583 20.2987 89.425 21.6V20H94.257V36H89.425V34.4C88.3583 35.7013 86.9077 36.352 85.073 36.352ZM83.505 30.848C84.1877 31.5947 85.073 31.968 86.161 31.968C87.249 31.968 88.1237 31.5947 88.785 30.848C89.4677 30.1013 89.809 29.152 89.809 28C89.809 26.848 89.4677 25.8987 88.785 25.152C88.1237 24.4053 87.249 24.032 86.161 24.032C85.073 24.032 84.1877 24.4053 83.505 25.152C82.8437 25.8987 82.513 26.848 82.513 28C82.513 29.152 82.8437 30.1013 83.505 30.848ZM98.234 36V20H103.066V21.632C103.983 20.3093 105.466 19.648 107.514 19.648C109.455 19.648 110.97 20.2987 112.058 21.6C113.167 22.9013 113.722 24.6187 113.722 26.752V36H108.89V27.584C108.89 25.216 108.026 24.032 106.298 24.032C105.338 24.032 104.559 24.384 103.962 25.088C103.365 25.792 103.066 26.8373 103.066 28.224V36H98.234ZM119.884 17.824C119.073 17.824 118.369 17.536 117.772 16.96C117.175 16.3627 116.876 15.648 116.876 14.816C116.876 13.984 117.175 13.28 117.772 12.704C118.369 12.1067 119.073 11.808 119.884 11.808C120.737 11.808 121.452 12.1067 122.028 12.704C122.625 13.28 122.924 13.984 122.924 14.816C122.924 15.648 122.625 16.3627 122.028 16.96C121.452 17.536 120.737 17.824 119.884 17.824ZM117.484 36V20H122.316V36H117.484ZM126.297 36V12H131.129V36H126.297ZM135.109 36V12H139.941V36H135.109ZM150.385 36.352C148.316 36.352 146.556 35.5307 145.106 33.888C143.676 32.2453 142.962 30.2827 142.962 28C142.962 25.7173 143.676 23.7547 145.106 22.112C146.556 20.4693 148.316 19.648 150.385 19.648C152.22 19.648 153.671 20.2987 154.738 21.6V20H159.569V36H154.738V34.4C153.671 35.7013 152.22 36.352 150.385 36.352ZM148.818 30.848C149.5 31.5947 150.386 31.968 151.474 31.968C152.562 31.968 153.436 31.5947 154.098 30.848C154.78 30.1013 155.122 29.152 155.122 28C155.122 26.848 154.78 25.8987 154.098 25.152C153.436 24.4053 152.562 24.032 151.474 24.032C150.386 24.032 149.5 24.4053 148.818 25.152C148.156 25.8987 147.826 26.848 147.826 28C147.826 29.152 148.156 30.1013 148.818 30.848Z" fill="#F1F5F9"/>
                     <path d="M41 23.1148C41 33.1427 32.9177 41.2295 23 41.2295C13.0823 41.2295 5 33.1427 5 23.1148C5 13.0868 13.0823 5 23 5C32.9177 5 41 13.0868 41 23.1148Z" stroke="#FDF2F8" stroke-width="10"/>
@@ -40,15 +107,15 @@
                 <div class="absolute top-3 right-3 border border-green-500 w-7 h-7 flex justify-center items-center rounded-full close-menu md:hidden">
                     <i class="fa-solid fa-xmark text-green-500"></i>
                 </div>
-                <ul class="text-2xl text-green-500 md:text-slate-200 md:text-base space-y-5 md:flex md:space-x-5 md:space-y-0">
-                    <li><a href="#home" class="mobile-slide-closed">Home</a></li>
+                <ul class="text-2xl text-green-500 dark:text-slate-200 md:text-slate-200 md:text-base space-y-5 md:flex md:space-x-5 md:space-y-0">
+                    <li><a href="#home" class="mobile-slide-closed active-link">Home</a></li>
                     <li><a href="#chats" class="mobile-slide-closed">Chats</a></li>
                     <li><a href="#device" class="mobile-slide-closed">Device</a></li>
                 </ul>
             </div>
 
             <!-- dark mode -->
-            <div class="flex space-x-2">
+            <div class="flex space-x-2 scale-50 md:scale-75">
                 <div class="md:hidden menu-open w-8 h-8 flex justify-center items-center border border-green-500 rounded-full">
                     <i class="fa-solid fa-bars text-white text-xl"></i>
                 </div>
@@ -68,19 +135,19 @@
     </div>
 
     <!-- Hero section -->
-    <section id="home" class="bg-green-500 py-40 px-5">
+    <section id="home" class="bg-green-500 py-40 px-5 dark:bg-slate-800">
         <div class="text-center">
-            <h1 class="text-4xl font-bold mb-5 text-slate-100">IMAGINE A PLACE...</h1>
-            <p class="text-slate-200 mb-10 max-w-sm md:max-w-xl mx-auto">
+            <h1 class="text-4xl font-bold mb-5 text-slate-100 headline">IMAGINE A PLACE...</h1>
+            <p class="text-slate-200 mb-10 max-w-sm md:max-w-xl mx-auto headline">
                 ...where you can belong to a school club, a gaming group, or a worldwide art community. Where just you and a handful of friends can spend time together. A place that makes it easy to talk every day and hang out more often.
             </p>
 
             <div class="flex flex-col items-center space-y-4 md:flex-row md:justify-center md:space-x-4 md:space-y-0">
-                <button class="flex items-center space-x-2 bg-slate-100 text-green-500 px-5 py-3 rounded-full">
+                <button class="flex items-center space-x-2 bg-slate-100 text-green-500 px-5 py-3 rounded-full headline">
                     <i class="fa-solid fa-download"></i>
                     <span>Download Now</span>
                 </button>
-                <button class="flex items-center space-x-2 bg-slate-900 text-white px-9 py-3 rounded-full">
+                <button class="flex items-center space-x-2 bg-slate-900 text-white px-9 py-3 rounded-full headline">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>Order Now</span>
                 </button>
@@ -88,164 +155,180 @@
         </div>
     </section>
 
-    <!-- First Chat section -->
+    <!-- Chats section -->
     <section id="chats">
-        <div class="space-y-10 px-5 my-40 justify-center items-center flex flex-col md:flex-row md:space-x-10">
-            <!-- card chat -->
-            <div class="p-5 shadow-lg rounded-3xl max-w-md">
-                <h1 class="text-3xl font-bold mb-3">Chats</h1>
-                <div class="space-y-3">
-                    <div class="flex items-center space-x-3 border rounded-2xl p-3">
-                        <div class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
-                            <i class="fa-solid fa-power-off"></i>
+        <!-- First Chat section -->
+        <section>
+            <div class="space-y-10 px-5 my-40 justify-center items-center flex flex-col md:flex-row md:space-x-10">
+                <!-- card chat -->
+                <div class="p-5 shadow-lg rounded-3xl max-w-md headline">
+                    <h1 class="text-3xl font-bold mb-3 dark:text-slate-200">Chats</h1>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3 border rounded-2xl p-3">
+                            <div class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
+                                <i class="fa-solid fa-power-off"></i>
+                            </div>
+                            <div>
+                                <h1 class="font-bold dark:text-slate-400">#tailwindcss</h1>
+                                <h6 class="text-green-500">Nway Oo: Thanks for everything.</h6>
+                            </div>
                         </div>
-                        <div>
-                            <h1 class="font-bold">#tailwindcss</h1>
-                            <h6 class="text-green-500">Nway Oo: Thanks for everything.</h6>
+        
+                        <div class="flex items-center space-x-3 border rounded-2xl p-3">
+                            <div
+                                class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
+                                <i class="fa-solid fa-power-off"></i>
+                            </div>
+                            <div>
+                                <h1 class="font-bold dark:text-slate-400">React</h1>
+                                <h6 class="text-green-500">Nway Oo: Thanks.</h6>
+                            </div>
+                        </div>
+        
+                        <div class="flex items-center space-x-3 border rounded-2xl p-3">
+                            <div
+                                class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
+                                <i class="fa-solid fa-power-off"></i>
+                            </div>
+                            <div>
+                                <h1 class="font-bold dark:text-slate-400">Bootstrap</h1>
+                                <h6 class="text-green-500">Nway Oo: Responsive First</h6>
+                            </div>
                         </div>
                     </div>
-    
-                    <div class="flex items-center space-x-3 border rounded-2xl p-3">
-                        <div class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
-                            <i class="fa-solid fa-power-off"></i>
+                </div>
+        
+                <!-- chat content -->
+                <div class="text-center md:text-left headline">
+                    <h1 class="text-3xl mb-5 text-slate-800 font-bold max-w-md dark:text-slate-200">
+                        Create an invite-only place where you belong
+                    </h1>
+                    <p class="text-slate-500 max-w-sm md:max-w-xl mx-auto md:mx-0">
+                        Vanilla servers are organized into topic-based channels where you can collaborate, share, and just talk
+                        about your day without clogging up a group chat.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Second Chat section -->
+        <section class="bg-slate-100 dark:bg-slate-800">
+            <div class="space-y-10 px-5 p-40 justify-center items-center flex flex-col md:flex-row md:space-x-10">
+                <!-- chat content -->
+                <div class="text-center md:text-left headline">
+                    <h1 class="text-3xl mb-5 text-slate-800 font-bold dark:text-slate-200">Where hanging out is easy</h1>
+                    <p class="text-slate-500 max-w-sm md:max-w-xl mx-auto md:mx-0">
+                        Grab a seat in a voice channel when you're free. Friends in your server can see you're around and
+                        instantly pop in to talk without having to call.
+                    </p>
+                </div>
+        
+                <!-- card chat -->
+                <div class="p-5 shadow-lg rounded-3xl max-w-md bg-white headline dark:bg-slate-800">
+                    <h1 class="text-3xl font-bold mb-3 dark:text-slate-200">Chats</h1>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3 border rounded-2xl p-3">
+                            <div
+                                class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
+                                <i class="fa-solid fa-power-off"></i>
+                            </div>
+                            <div>
+                                <h1 class="font-bold dark:text-slate-400">#tailwindcss</h1>
+                                <h6 class="text-green-500">Nway Oo: Thanks for everything.</h6>
+                            </div>
                         </div>
-                        <div>
-                            <h1 class="font-bold">React</h1>
-                            <h6 class="text-green-500">Nway Oo: Thanks.</h6>
+        
+                        <div class="flex items-center space-x-3 border rounded-2xl p-3">
+                            <div
+                                class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
+                                <i class="fa-solid fa-power-off"></i>
+                            </div>
+                            <div>
+                                <h1 class="font-bold dark:text-slate-400">React</h1>
+                                <h6 class="text-green-500">Nway Oo: Thanks.</h6>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="flex items-center space-x-3 border rounded-2xl p-3">
-                        <div class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
-                            <i class="fa-solid fa-power-off"></i>
-                        </div>
-                        <div>
-                            <h1 class="font-bold">Bootstrap</h1>
-                            <h6 class="text-green-500">Nway Oo: Responsive First</h6>
+        
+                        <div class="flex items-center space-x-3 border rounded-2xl p-3">
+                            <div
+                                class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
+                                <i class="fa-solid fa-power-off"></i>
+                            </div>
+                            <div>
+                                <h1 class="font-bold dark:text-slate-400">Bootstrap</h1>
+                                <h6 class="text-green-500">Nway Oo: Responsive First</h6>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- chat content -->
-            <div class="text-center md:text-left">
-                <h1 class="text-3xl mb-5 text-slate-800 font-bold max-w-md">Create an invite-only place where you belong</h1>
-                <p class="text-slate-500 max-w-sm md:max-w-xl mx-auto md:mx-0">
-                    Vanilla servers are organized into topic-based channels where you can collaborate, share, and just talk about your day without clogging up a group chat.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Second Chat section -->
-    <section class="bg-slate-100">
-        <div class="space-y-10 px-5 p-40 justify-center items-center flex flex-col md:flex-row md:space-x-10">
-            <!-- chat content -->
-            <div class="text-center md:text-left">
-                <h1 class="text-3xl mb-5 text-slate-800 font-bold">Where hanging out is easy</h1>
-                <p class="text-slate-500 max-w-sm md:max-w-xl mx-auto md:mx-0">
-                    Grab a seat in a voice channel when you're free. Friends in your server can see you're around and instantly pop in to talk without having to call.
-                </p>
-            </div>
-
-            <!-- card chat -->
-            <div class="p-5 shadow-lg rounded-3xl max-w-md bg-white">
-                <h1 class="text-3xl font-bold mb-3">Chats</h1>
-                <div class="space-y-3">
-                    <div class="flex items-center space-x-3 border rounded-2xl p-3">
-                        <div class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
-                            <i class="fa-solid fa-power-off"></i>
+        </section>
+        
+        <!-- Third Chat section -->
+        <section>
+            <div class="space-y-10 px-5 my-40 justify-center items-center flex flex-col md:flex-row md:space-x-10">
+                <!-- card chat -->
+                <div class="p-5 shadow-lg rounded-3xl max-w-md headline">
+                    <h1 class="text-3xl font-bold mb-3 dark:text-slate-200">Chats</h1>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3 border rounded-2xl p-3">
+                            <div
+                                class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
+                                <i class="fa-solid fa-power-off"></i>
+                            </div>
+                            <div>
+                                <h1 class="font-bold dark:text-slate-400">#tailwindcss</h1>
+                                <h6 class="text-green-500">Nway Oo: Thanks for everything.</h6>
+                            </div>
                         </div>
-                        <div>
-                            <h1 class="font-bold">#tailwindcss</h1>
-                            <h6 class="text-green-500">Nway Oo: Thanks for everything.</h6>
+        
+                        <div class="flex items-center space-x-3 border rounded-2xl p-3">
+                            <div
+                                class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
+                                <i class="fa-solid fa-power-off"></i>
+                            </div>
+                            <div>
+                                <h1 class="font-bold dark:text-slate-400">React</h1>
+                                <h6 class="text-green-500">Nway Oo: Thanks.</h6>
+                            </div>
                         </div>
-                    </div>
-    
-                    <div class="flex items-center space-x-3 border rounded-2xl p-3">
-                        <div class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
-                            <i class="fa-solid fa-power-off"></i>
-                        </div>
-                        <div>
-                            <h1 class="font-bold">React</h1>
-                            <h6 class="text-green-500">Nway Oo: Thanks.</h6>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center space-x-3 border rounded-2xl p-3">
-                        <div class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
-                            <i class="fa-solid fa-power-off"></i>
-                        </div>
-                        <div>
-                            <h1 class="font-bold">Bootstrap</h1>
-                            <h6 class="text-green-500">Nway Oo: Responsive First</h6>
+        
+                        <div class="flex items-center space-x-3 border rounded-2xl p-3">
+                            <div
+                                class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
+                                <i class="fa-solid fa-power-off"></i>
+                            </div>
+                            <div>
+                                <h1 class="font-bold dark:text-slate-400">Bootstrap</h1>
+                                <h6 class="text-green-500">Nway Oo: Responsive First</h6>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Third Chat section -->
-    <section>
-        <div class="space-y-10 px-5 my-40 justify-center items-center flex flex-col md:flex-row md:space-x-10">
-            <!-- card chat -->
-            <div class="p-5 shadow-lg rounded-3xl max-w-md">
-                <h1 class="text-3xl font-bold mb-3">Chats</h1>
-                <div class="space-y-3">
-                    <div class="flex items-center space-x-3 border rounded-2xl p-3">
-                        <div class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
-                            <i class="fa-solid fa-power-off"></i>
-                        </div>
-                        <div>
-                            <h1 class="font-bold">#tailwindcss</h1>
-                            <h6 class="text-green-500">Nway Oo: Thanks for everything.</h6>
-                        </div>
-                    </div>
-    
-                    <div class="flex items-center space-x-3 border rounded-2xl p-3">
-                        <div class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
-                            <i class="fa-solid fa-power-off"></i>
-                        </div>
-                        <div>
-                            <h1 class="font-bold">React</h1>
-                            <h6 class="text-green-500">Nway Oo: Thanks.</h6>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center space-x-3 border rounded-2xl p-3">
-                        <div class="bg-green-500 w-10 h-10 rounded-full flex justify-center items-center text-white text-lg">
-                            <i class="fa-solid fa-power-off"></i>
-                        </div>
-                        <div>
-                            <h1 class="font-bold">Bootstrap</h1>
-                            <h6 class="text-green-500">Nway Oo: Responsive First</h6>
-                        </div>
-                    </div>
+        
+                <!-- chat content -->
+                <div class="text-center md:text-left headline">
+                    <h1 class="text-3xl mb-5 text-slate-800 font-bold dark:text-slate-200">From few to a fandom</h1>
+                    <p class="text-slate-500 max-w-sm md:max-w-xl mx-auto md:mx-0">
+                        Get any community running with moderation tools and custom member access. Give members special powers,
+                        set up private channels, and more.
+                    </p>
                 </div>
             </div>
-
-            <!-- chat content -->
-            <div class="text-center md:text-left">
-                <h1 class="text-3xl mb-5 text-slate-800 font-bold">From few to a fandom</h1>
-                <p class="text-slate-500 max-w-sm md:max-w-xl mx-auto md:mx-0">
-                    Get any community running with moderation tools and custom member access. Give members special powers, set up private channels, and more. 
-                </p>
-            </div>
-        </div>
+        </section>
     </section>
 
     <!-- Device section -->
-    <section id="device" class="bg-slate-100">
+    <section id="device" class="bg-slate-100 dark:bg-slate-800">
         <div class="container mx-auto text-center space-y-20 px-5 md:px-0 p-40">
-            <div class="mb-10">
-                <h1 class="text-3xl font-bold mb-3 max-w-sm md:max-w-full mx-auto text-slate-800">RELIABLE TECH FOR STAYING CLOSE</h1>
+            <div class="mb-10 headline">
+                <h1 class="text-3xl font-bold mb-3 max-w-sm md:max-w-full mx-auto text-slate-800 dark:text-slate-200">RELIABLE TECH FOR STAYING CLOSE</h1>
                 <p class="md:max-w-xl mx-auto text-slate-500">
                     Get any community running with moderation tools and custom member access. Give members special powers, set up private channels, and more.
                 </p>
             </div>
 
-            <div>
+            <div class="headline">
                 <svg class="md:max-w-3xl md:mx-auto" viewBox="0 0 1140 557" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="835" y="5" width="300" height="496" rx="45" fill="#475569" stroke="black" stroke-width="10"/>
                     <circle cx="1022.14" cy="437.712" r="28.7119" fill="#EF4444"/>
@@ -284,8 +367,8 @@
                 </svg>
             </div>
 
-            <div>
-                <h1 class="text-3xl font-bold mb-3 max-w-sm md:max-w-full mx-auto text-slate-800">Ready to start your journey?</h1>
+            <div class="headline">
+                <h1 class="text-3xl font-bold mb-3 max-w-sm md:max-w-full mx-auto text-slate-800 dark:text-slate-200">Ready to start your journey?</h1>
                 <button class="flex items-center space-x-2 bg-green-500 text-white px-8 py-3 rounded-full mx-auto">
                     <i class="fa-solid fa-download"></i>
                     <span>Download Now</span>
@@ -297,7 +380,7 @@
     <!-- Footer -->
     <footer class="bg-slate-900 py-24 px-12 md:py-16 md:px-28">
         <div class="space-y-10">
-            <div class="flex flex-col items-center space-y-10 md:flex-row md:justify-between">
+            <div class="flex flex-col items-center space-y-10 md:flex-row md:justify-between headline">
                 <div class="text-2xl font-bold text-center text-slate-200">
                     <span>IMAGINE A PLACE</span>
                 </div>
@@ -341,11 +424,11 @@
                 </div>
             </div>
             
-            <div class="">
+            <div class="headline">
                 <hr>
             </div>
             
-            <div class="flex justify-between">
+            <div class="flex justify-between headline">
                 <h1 class="text-4xl font-bold text-slate-200">Vanilla</h1>
                 <div>
                     <button class="flex items-center space-x-2 bg-green-500 text-white px-8 py-3 rounded-full mx-auto">
@@ -358,7 +441,13 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js" integrity="sha512-fHXRw0CXruAoINU11+hgqYvY/PcsOWzmj0QmcSOtjlJcqITbPyypc8cYpidjPurWpCnlB8VKfRwx6PIpASCUkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
     <script>
+        // loading
+        window.addEventListener('load', ()=>{
+            document.querySelector('.loading').style.display = 'none';
+        })
+
         // Dark Mode
         const toggleB = document.getElementById("toggleB");
 
@@ -435,19 +524,33 @@
 
             sections.forEach((current) => {
                 const sectionHeight = current.offsetHeight,  // current section height
-                    sectionTop = current.offsetTop - 58,  // current section top
+                    sectionTop = current.offsetTop - 58;  // - 58  // current section top
                     sectionId = current.getAttribute("id");  // current section id
 
                     if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
                         //document.querySelector("a[href*=" + sectionId + "]").classList.add("active-link");
-                        document.querySelector('[href="#' + sectionId + '"]').classList.add("text-indigo-600");
+                        document.querySelector('[href="#' + sectionId + '"]').classList.add("active-link");
                     } else {
-                        document.querySelector("a[href*=" + sectionId + "]").classList.remove("text-indigo-600");
+                        document.querySelector("a[href*=" + sectionId + "]").classList.remove("active-link");
                     }
                 });
+
+            if (scrollY == 0) {
+                document.querySelector('[href="#home"]').classList.add("active-link");
+            }
         }
         
         window.addEventListener("scroll", scrollActive);
+
+        // ScrollReveal
+        ScrollReveal().reveal('.headline', { 
+            delay: 500,
+            origin: 'bottom',
+            distance: '50px',
+            interval: 300,
+            scale: 0.85,
+            reset: true 
+        });
     </script>
 </body>
 </html>

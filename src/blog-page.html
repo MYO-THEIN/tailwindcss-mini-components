@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dist/output.css">
+    <link rel="stylesheet" href="/node_modules/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* toggleB */
+        input:checked ~ .dot {
+            transform: translateX(100%);
+            background-color: #22C55E;
+        }
+        input:checked ~ .bb {
+            background-color: #4b4848;
+        }
+        body {
+            background-color: #121927;
+        }
+        .swiper-button-prev:after,
+        .swiper-button-next:after {
+            font-size: 30px;
+            color: white;
+        }
+        @media screen and (max-width: 768px) {
+            .swiper-button-prev,
+            .swiper-button-next {
+                top: 90%;
+            }
+            .swiper-button-prev {
+                left: 90%;
+            }
+        }
+    </style>
+</head>
+<body class="dark:bg-slate-900">
+    <!-- NavBar -->
+    <div class="bg-slate-800 sticky top-0 z-10">
+        <div class="container mx-auto px-5 py-5 lg:px-32">
+            <div class="flex justify-between items-center">
+                <!-- logo & name -->
+                <div class="flex items-center">
+                    <img class="w-10 mr-2" src="/public/assets/img/bl.svg">
+                    <span class="text-slate-200 text-xl hidden md:flex">berryleaf</span>
+                </div>
+        
+                <!-- menu --> 
+                <div class="text-slate-400">
+                    <ul class="flex items-center space-x-3 text-xs md:text-base">
+                        <li>Home</li>
+                        <li>Why?</li>
+                        <li>Features</li>
+                        <li>Clients</li>
+                    </ul>
+                </div>
+        
+                <!-- dark mode -->
+                <div class="flex scale-50 md:scale-75">
+                    <label for="toggleB" class="flex items-center cursor-pointer">
+                        <!-- toggle -->
+                        <div class="relative">
+                            <!-- input -->
+                            <input type="checkbox" id="toggleB" class="sr-only">
+                            <!-- line -->
+                            <div class="block bg-green-600 w-14 h-8 rounded-full bb"></div>
+                            <!-- dot -->
+                            <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slider -->
+    <div class="container mx-auto px-5 lg:px-32 relative mb-28">
+        <!-- Swiper main container -->
+        <div class="swiper mt-28 headline">
+            <!-- additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- slide 1 -->
+                <div class="swiper-slide">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img class="w-full h-72 md:h-96 object-cover" src="/public/assets/img/pawel-czerwinski-2CDRjyQw8aQ-unsplash.jpg">
+                        <div class="absolute bottom-5 left-5">
+                            <h1 class="text-2xl text-white mb-3 max-w-lg">How CPTS empowers job-ready penetration testing skills in cybersecurity
+                                teams</h1>
+                            <div class="text-white">
+                                <button class="bg-slate-700 p-2 py-1 rounded-lg">10 mins read</button>
+                                <span>Oct 4, 2022 </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- slide 2 -->
+                <div class="swiper-slide">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img class="w-full h-72 md:h-96 object-cover" src="/public/assets/img/pawel-czerwinski-HKHwdinroSo-unsplash.jpg">
+                        <div class="absolute bottom-5 left-5">
+                            <h1 class="text-2xl text-white mb-3 max-w-lg">How CPTS empowers job-ready penetration testing skills in cybersecurity
+                                teams</h1>
+                            <div class="text-white">
+                                <button class="bg-slate-700 p-2 py-1 rounded-lg">10 mins read</button>
+                                <span>Oct 4, 2022 </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- slide 3 -->
+                <div class="swiper-slide">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img class="w-full h-72 md:h-96 object-cover" src="/public/assets/img/pawel-czerwinski-JX5pBRtufVQ-unsplash.jpg">
+                        <div class="absolute bottom-5 left-5">
+                            <h1 class="text-2xl text-white mb-3 max-w-lg">How CPTS empowers job-ready penetration testing skills in cybersecurity
+                                teams</h1>
+                            <div class="text-white">
+                                <button class="bg-slate-700 p-2 py-1 rounded-lg">10 mins read</button>
+                                <span>Oct 4, 2022 </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- pagination -->
+            <div class="swiper-pagination"></div>
+        
+            <!-- navigation buttons -->
+            <div class="hidden md:flex">
+                <div class="swiper-button-prev"></div>
+            </div>
+            <div class="hidden md:flex">
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Member section -->
+    <div class="container mx-auto px-5 lg:px-32 mb-28">
+        <div class="grid grid-cols-2 gap-10 md:grid-cols-4">
+            <div class="text-center headline">
+                <h1 class="text-yellow-500 text-4xl font-bold">500+ M</h1>
+                <p class="text-slate-300">Hacking Labs</p>
+            </div>
+
+            <div class="text-center headline">
+                <h1 class="text-green-500 text-4xl font-bold">400+ M</h1>
+                <p class="text-slate-300">Platform Members</p>
+            </div>
+            
+            <div class="text-center headline">
+                <h1 class="text-red-500 text-4xl font-bold">300+ M</h1>
+                <p class="text-slate-300">Playtime Hours</p>
+            </div>
+            
+            <div class="text-center headline">
+                <h1 class="text-blue-500 text-4xl font-bold">300+ K</h1>
+                <p class="text-slate-300">Companies & Universities</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Card section -->
+    <div class="container mx-auto px-5 lg:px-32 mb-28">
+        <div class="text-center mb-14 headline">
+            <h1 class="text-xl font-bold text-slate-100 mb-1">How Hackers Digest</h1>
+            <p class="text-slate-400">Want to dive in deeper into a specific category? Click on a topic below.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- card 1 -->
+            <div class="bg-[#1A2332] p-5 rounded-3xl space-y-2 headline">
+                <img class="rounded-2xl" src="/public/assets/img/klara-kulikova-kiLdjFm2y14-unsplash.jpg">
+                <div class="text-slate-400 text-xs">
+                    <span>HACKING</span> | <span>10 mins read</span>
+                </div>
+                <h2 class="text-slate-100 text-2xl">
+                    From poker player to senior pentester at Oracle: Jeremy's journey to cybersecurity
+                </h2>
+            </div>
+
+            <!-- card 2 -->
+            <div class="bg-[#1A2332] p-5 rounded-3xl space-y-2 headline">
+                <img class="rounded-2xl" src="/public/assets/img/klara-kulikova-kiLdjFm2y14-unsplash.jpg">
+                <div class="text-slate-400 text-xs">
+                    <span>HACKING</span> | <span>10 mins read</span>
+                </div>
+                <h2 class="text-slate-100 text-2xl">
+                    From poker player to senior pentester at Oracle: Jeremy's journey to cybersecurity
+                </h2>
+            </div>
+            
+            <!-- card 3 -->
+            <div class="bg-[#1A2332] p-5 rounded-3xl space-y-2 headline">
+                <img class="rounded-2xl" src="/public/assets/img/klara-kulikova-kiLdjFm2y14-unsplash.jpg">
+                <div class="text-slate-400 text-xs">
+                    <span>HACKING</span> | <span>10 mins read</span>
+                </div>
+                <h2 class="text-slate-100 text-2xl">
+                    From poker player to senior pentester at Oracle: Jeremy's journey to cybersecurity
+                </h2>
+            </div>
+            
+            <!-- card 4 -->
+            <div class="bg-[#1A2332] p-5 rounded-3xl space-y-2 headline">
+                <img class="rounded-2xl" src="/public/assets/img/klara-kulikova-kiLdjFm2y14-unsplash.jpg">
+                <div class="text-slate-400 text-xs">
+                    <span>HACKING</span> | <span>10 mins read</span>
+                </div>
+                <h2 class="text-slate-100 text-2xl">
+                    From poker player to senior pentester at Oracle: Jeremy's journey to cybersecurity
+                </h2>
+            </div>
+            
+            <!-- card 5 -->
+            <div class="bg-[#1A2332] p-5 rounded-3xl space-y-2 headline">
+                <img class="rounded-2xl" src="/public/assets/img/klara-kulikova-kiLdjFm2y14-unsplash.jpg">
+                <div class="text-slate-400 text-xs">
+                    <span>HACKING</span> | <span>10 mins read</span>
+                </div>
+                <h2 class="text-slate-100 text-2xl">
+                    From poker player to senior pentester at Oracle: Jeremy's journey to cybersecurity
+                </h2>
+            </div>
+            
+            <!-- card 6 -->
+            <div class="bg-[#1A2332] p-5 rounded-3xl space-y-2 headline">
+                <img class="rounded-2xl" src="/public/assets/img/klara-kulikova-kiLdjFm2y14-unsplash.jpg">
+                <div class="text-slate-400 text-xs">
+                    <span>HACKING</span> | <span>10 mins read</span>
+                </div>
+                <h2 class="text-slate-100 text-2xl">
+                    From poker player to senior pentester at Oracle: Jeremy's journey to cybersecurity
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <script src="/node_modules/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+        // Swiper
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            autoplay: {
+                delay: 3000
+            },
+            effect: "fade",
+            loop: true,
+
+            // Pagination
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'bullets',
+                clickable: true
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // Scrollbar
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        });
+
+        // Dark Mode
+        const toggleB = document.getElementById("toggleB");
+
+        const changeThemeToDark = () => {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('data-theme', 'dark');
+        }
+        const changeThemeToLight = () => {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('data-theme', 'light');
+        }
+
+        toggleB.addEventListener('click', () => {
+            const theme = localStorage.getItem('data-theme');
+            if (theme === 'dark') {
+                changeThemeToLight();
+            } else {
+                changeThemeToDark();
+            }
+        });
+
+        const theme = localStorage.getItem('data-theme');
+        if (theme === 'dark') {
+            changeThemeToDark();
+            toggleB.setAttribute('checked', 'checked');
+        } else {
+            changeThemeToLight();
+        }
+
+        // ScrollReveal
+        ScrollReveal().reveal('.headline', { 
+            delay: 300,
+            origin: 'bottom',
+            distance: '20px',
+            interval: 300,
+            scale: 0.85,
+            reset: true
+        });
+    </script>
+</body>
+</html>
